@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Office Inventory System - Sign In</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+        body { font-family: 'Roboto', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col relative">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="assets/SDOINBackground.jpg" alt="Background" class="w-full h-full object-cover opacity-40">
+        <div class="absolute inset-0 bg-black/10"></div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm py-2 px-4 md:px-12 flex items-center justify-between z-10 relative">
+        <!-- Left Side: SDOIN Logo and Division Name -->
+        <div class="flex items-center gap-4">
+            <img src="assets/SDOINLogo.svg" alt="SDOIN Logo" class="h-14 w-auto">
+            
+            <div class="h-12 w-1 bg-red-600"></div>
+
+            <div class="flex flex-col">
+                <h1 class="text-xl md:text-3xl font-black text-blue-900 leading-tight tracking-wide">
+                    SCHOOLS DIVISION<br>OF ILOCOS NORTE
+                </h1>
+            </div>
+        </div>
+
+        <!-- Right Side: Supply Office Title -->
+        <div class="text-right hidden md:block">
+            <h2 class="text-xl font-bold italic text-blue-900">SUPPLY OFFICE</h2>
+            <p class="text-sm font-bold text-gray-500 italic tracking-wider">INVENTORY SYSTEM</p>
+        </div>
+    </header>
+
+    <!-- Main Content: Login Form -->
+    <main class="flex-grow flex items-center justify-center relative w-full">
+        <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-md mx-4 p-8 z-10 relative">
+            <!-- Form Title -->
+            <h2 class="text-center text-3xl font-bold text-blue-800 mb-6">Sign In</h2>
+
+            <!-- Tabs -->
+            <div class="flex justify-center mb-6 border-b border-gray-300">
+                <button id="offices-tab" class="tab-button flex-1 pb-2 text-lg font-bold text-blue-700 border-b-4 border-blue-600">
+                    Offices
+                </button>
+                <button id="admin-tab" class="tab-button flex-1 pb-2 text-lg font-bold text-blue-900 text-opacity-70 hover:text-blue-700">
+                    Admin
+                </button>
+            </div>
+
+            <!-- Offices Form -->
+            <form id="offices-form" class="login-form space-y-5">
+                <div>
+                    <label for="office-select" class="block text-sm font-bold text-blue-900 mb-1 italic">Office</label>
+                    <div class="relative">
+                        <select id="office-select" name="office" class="w-full bg-gray-300 text-gray-600 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none font-style-italic">
+                            <option value="" selected disabled>Select Office</option>
+                            <option value="ITO">ITO (Information Technology Office)</option>
+                            <option value="OSDS">OSDS (Office of the Schools Division Superintendent)</option>
+                            <option value="BAC">BAC (Bids and Awards Committee)</option>
+                            <option value="CID">CID (Curriculum Implementation Division)</option>
+                            <option value="Budget Office">Budget Office</option>
+                            <option value="Accounting Office">Accounting Office</option>
+                            <option value="Cash Office">Cash Office</option>
+                            <option value="Records Office">Records Office</option>
+                            <option value="SGOD 1">SGOD 1</option>
+                            <option value="SGOD2">SGOD2</option>
+                            <option value="Legal Office">Legal Office</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="offices-password" class="block text-sm font-bold text-blue-900 mb-1 italic">Password</label>
+                    <input type="password" id="offices-password" name="password" placeholder="Input password" 
+                           class="w-full bg-gray-300 text-gray-600 placeholder-gray-500 italic rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="pt-4 flex justify-center">
+                    <button type="submit" class="bg-blue-800 hover:bg-blue-900 text-white text-lg font-semibold py-3 px-12 rounded-full shadow-lg transition duration-300 uppercase tracking-wide">
+                        Sign In
+                    </button>
+                </div>
+            </form>
+
+            <!-- Admin Form -->
+            <form id="admin-form" class="login-form hidden space-y-5">
+                <div>
+                    <label for="admin-username" class="block text-sm font-bold text-blue-900 mb-1 italic">Username</label>
+                    <input type="text" id="admin-username" name="username" placeholder="Input username" 
+                           class="w-full bg-gray-300 text-gray-600 placeholder-gray-500 italic rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label for="admin-password" class="block text-sm font-bold text-blue-900 mb-1 italic">Password</label>
+                    <input type="password" id="admin-password" name="password" placeholder="Input password" 
+                           class="w-full bg-gray-300 text-gray-600 placeholder-gray-500 italic rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="pt-4 flex justify-center">
+                    <button type="submit" class="bg-blue-800 hover:bg-blue-900 text-white text-lg font-semibold py-3 px-12 rounded-full shadow-lg transition duration-300 uppercase tracking-wide">
+                        Sign In
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-white py-3 z-20 relative">
+        <div class="w-full flex justify-between items-center px-8 md:px-12 gap-4">
+            <img src="assets/DEPEDLogo.png" alt="DepEd Logo" class="h-10 w-auto flex-shrink-0">
+            <img src="assets/SDOINLogo.svg" alt="SDOIN Logo" class="h-12 w-auto flex-shrink-0" style="filter: blur(0) !important; -webkit-filter: blur(0) !important;">
+            <img src="assets/TouredLogo.svg" alt="TourEd Logo" class="h-8 w-auto flex-shrink-0">
+            <img src="assets/InheritedLogo.svg" alt="INheritEd Logo" class="h-10 w-auto flex-shrink-0">
+            <img src="assets/SDOINGreat.svg" alt="SDOIN Great Logo" class="h-10 w-auto flex-shrink-0" style="filter: blur(0) !important; -webkit-filter: blur(0) !important;">
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

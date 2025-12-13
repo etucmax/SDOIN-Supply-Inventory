@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Office - Request</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/request.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+    <!-- Left Sidebar -->
+    <aside class="w-64 text-white flex flex-col h-screen fixed sidebar-bg">
+        <!-- Logo Section -->
+        <div class="p-6">
+            <div class="flex flex-col items-center">
+                <img src="../assets/SDOINLogo.svg" alt="SDOIN Logo" class="w-16 h-16 object-contain mb-2">
+                <h1 class="text-xl font-bold">SDOIN</h1>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="flex-1 py-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="items.html" class="nav-link">
+                        <i class="fas fa-shopping-basket w-5 ml-4"></i>
+                        <span class="font-medium">Items</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="request.html" class="nav-link active-link">
+                        <div class="active-indicator"></div>
+                        <i class="fas fa-file-alt w-5 ml-4"></i>
+                        <span class="font-medium">Request</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-user w-5 ml-4"></i>
+                        <span class="font-medium">Contact Us</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="historyRequest.html" class="nav-link">
+                        <i class="fas fa-clock w-5 ml-4"></i>
+                        <span class="font-medium">History Request</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- User Profile Section -->
+        <div class="p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center">
+                    <i class="fas fa-user text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-semibold text-sm" id="user-name">Maricar T. Tulep</p>
+                    <p class="text-xs text-blue-300" id="user-title">Administrative Officer IV</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 ml-64 bg-gray-100 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm px-8 py-4 flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-gray-800">SUPPLY OFFICE</h2>
+            <div class="flex items-center gap-4">
+                <img src="../assets/DEPEDLogo.png" alt="DepEd Logo" class="h-10 w-auto">
+            </div>
+        </header>
+
+        <!-- Content Section -->
+        <div class="p-8">
+            <!-- Title and Submit Button -->
+            <div class="mb-6 flex items-center justify-between">
+                <h3 class="text-3xl font-bold text-gray-800">Requisition and Issue Slip</h3>
+                <button id="submit-request-btn" class="submit-btn">
+                    SUBMIT
+                </button>
+            </div>
+
+            <!-- Requester Details Card -->
+            <div class="form-card mb-6">
+                <h4 class="form-section-title">Requester Details :</h4>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label class="form-label">Division:</label>
+                        <input type="text" id="division" class="form-input" value="SDOIN" readonly>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">Office:</label>
+                        <select id="office" class="form-input form-select">
+                            <option value="ITO">ITO</option>
+                            <option value="OSDS">OSDS (Office of the Schools Division Superintendent)</option>
+                            <option value="BAC">BAC (Bids and Awards Committee)</option>
+                            <option value="CID">CID (Curriculum Implementation Division)</option>
+                            <option value="Budget Office">Budget Office</option>
+                            <option value="Accounting Office">Accounting Office</option>
+                            <option value="Cash Office">Cash Office</option>
+                            <option value="Records Office">Records Office</option>
+                            <option value="SGOD 1">SGOD 1</option>
+                            <option value="SGOD2">SGOD2</option>
+                            <option value="Legal Office">Legal Office</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">Name:</label>
+                        <input type="text" id="requester-name" class="form-input" placeholder="">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">Designation:</label>
+                        <input type="text" id="designation" class="form-input" placeholder="">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">Date requested:</label>
+                        <input type="date" id="date-requested" class="form-input">
+                    </div>
+                    <div class="form-field form-field-full">
+                        <label class="form-label">Purpose:</label>
+                        <textarea id="purpose" class="form-input form-textarea" rows="2" placeholder=""></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Items Requested Card -->
+            <div class="form-card">
+                <h4 class="form-section-title">Items Requested:</h4>
+                <div class="table-container">
+                    <table class="request-table">
+                        <thead>
+                            <tr>
+                                <th>ITEM</th>
+                                <th>DESCRIPTION</th>
+                                <th>UNIT</th>
+                                <th>QUANTITY</th>
+                            </tr>
+                        </thead>
+                        <tbody id="request-items-tbody">
+                            <!-- Items will be dynamically generated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-container confirm-modal-container">
+            <div class="confirm-modal-content">
+                <h2 class="confirm-title">CONFIRM?</h2>
+                <div class="confirm-buttons">
+                    <button class="confirm-cancel-btn" id="cancel-confirm">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button class="confirm-ok-btn" id="ok-confirm">
+                        <i class="fas fa-check"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="scripts/request.js"></script>
+</body>
+</html>
+

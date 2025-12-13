@@ -1,0 +1,51 @@
+/* Custom styles for the login page */
+
+/* Form visibility */
+.login-form.hidden {
+    display: none;
+}
+
+.login-form {
+    display: block;
+}
+
+/* Select dropdown styling - custom arrow is already in HTML */
+select {
+    appearance: none;
+}
+
+/* Input placeholder styling */
+input::placeholder,
+select option:disabled {
+    color: #9ca3af;
+}
+
+/* Smooth transitions */
+.tab-button,
+button,
+input,
+select {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Footer logos - ensure they are not blurred */
+footer img {
+    filter: blur(0) !important;
+    -webkit-filter: blur(0) !important;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* Hide scrollbars */
+* {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+

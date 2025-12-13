@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Office - History Request</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/historyRequest.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+    <!-- Left Sidebar -->
+    <aside class="w-64 text-white flex flex-col h-screen fixed sidebar-bg">
+        <!-- Logo Section -->
+        <div class="p-6">
+            <div class="flex flex-col items-center">
+                <img src="../assets/SDOINLogo.svg" alt="SDOIN Logo" class="w-16 h-16 object-contain mb-2">
+                <h1 class="text-xl font-bold">SDOIN</h1>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="flex-1 py-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="items.html" class="nav-link">
+                        <i class="fas fa-shopping-basket w-5 ml-4"></i>
+                        <span class="font-medium">Items</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="request.html" class="nav-link">
+                        <i class="fas fa-file-alt w-5 ml-4"></i>
+                        <span class="font-medium">Request</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-user w-5 ml-4"></i>
+                        <span class="font-medium">Contact Us</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="historyRequest.html" class="nav-link active-link">
+                        <div class="active-indicator"></div>
+                        <i class="fas fa-clock w-5 ml-4"></i>
+                        <span class="font-medium">History Request</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- User Profile Section -->
+        <div class="p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center">
+                    <i class="fas fa-user text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-semibold text-sm" id="user-name">Maricar T. Tulep</p>
+                    <p class="text-xs text-blue-300" id="user-title">Administrative Officer IV</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 ml-64 bg-gray-100 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm px-8 py-4 flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-gray-800">SUPPLY OFFICE</h2>
+            <div class="flex items-center gap-4">
+                <img src="../assets/DEPEDLogo.png" alt="DepEd Logo" class="h-10 w-auto">
+            </div>
+        </header>
+
+        <!-- Content Section -->
+        <div class="p-8">
+            <!-- Title and Sort -->
+            <div class="mb-6 flex items-center justify-between">
+                <h3 class="text-3xl font-bold text-gray-800">REQUEST HISTORY</h3>
+                <div class="flex items-center gap-2">
+                    <label class="text-gray-700 font-medium">Sort by:</label>
+                    <select id="sort-by" class="history-select px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700">
+                        <option value="all">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="accepted">Accepted</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="table-container">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Office</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                        <!-- History items will be dynamically generated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Request Details Modal -->
+    <div id="details-modal" class="modal-overlay hidden">
+        <div class="modal-container details-modal-container">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2 class="modal-title">REQUEST DETAILS</h2>
+                <button class="modal-close" id="close-details-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-divider"></div>
+
+            <!-- Modal Content -->
+            <div class="details-modal-content">
+                <!-- Status -->
+                <div class="details-status-section">
+                    <span class="details-status-label">Status :</span>
+                    <span id="details-status" class="status-badge status-pending">PENDING</span>
+                </div>
+
+                <!-- Input Fields Row -->
+                <div class="details-input-row">
+                    <div class="details-input-field">
+                        <label class="details-label">RIS No.:</label>
+                        <input type="text" id="ris-number" class="details-input" placeholder="Input Number">
+                    </div>
+                    <div class="details-input-field">
+                        <label class="details-label">Responsibility Center Code:</label>
+                        <input type="text" id="center-code" class="details-input" placeholder="Input Number">
+                    </div>
+                    <div class="details-input-field">
+                        <label class="details-label">Fund Cluster</label>
+                        <input type="text" id="fund-cluster" class="details-input" placeholder="Input Number">
+                    </div>
+                </div>
+
+                <!-- Requestor Information -->
+                <div class="details-requestor-section">
+                    <h4 class="details-section-title">Requestor Information</h4>
+                    <div class="details-requestor-grid">
+                        <div class="details-requestor-left">
+                            <div class="details-info-item">
+                                <span class="details-info-label">Division:</span>
+                                <span id="details-division" class="details-info-value">SDOIN</span>
+                            </div>
+                            <div class="details-info-item">
+                                <span class="details-info-label">Name:</span>
+                                <span id="details-name" class="details-info-value">CHAD</span>
+                            </div>
+                            <div class="details-info-item">
+                                <span class="details-info-label">Date requested:</span>
+                                <span id="details-date" class="details-info-value">9-10-2025</span>
+                            </div>
+                        </div>
+                        <div class="details-requestor-right">
+                            <div class="details-info-item">
+                                <span class="details-info-label">Office:</span>
+                                <span id="details-office" class="details-info-value">ITO</span>
+                            </div>
+                            <div class="details-info-item">
+                                <span class="details-info-label">Designation:</span>
+                                <span id="details-designation" class="details-info-value">OJT</span>
+                            </div>
+                            <div class="details-info-item">
+                                <span class="details-info-label">Purpose:</span>
+                                <span id="details-purpose" class="details-info-value">TESTING</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Items Requested -->
+                <div class="details-items-section">
+                    <h4 class="details-section-title">Items Requested:</h4>
+                    <div class="details-table-container">
+                        <table class="details-table">
+                            <thead>
+                                <tr>
+                                    <th>ITEM</th>
+                                    <th>DESCRIPTION</th>
+                                    <th>UNIT</th>
+                                    <th>QUANTITY</th>
+                                </tr>
+                            </thead>
+                            <tbody id="details-items-tbody">
+                                <!-- Items will be dynamically generated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Download Button -->
+                <div class="details-download-wrapper">
+                    <button id="download-file-btn" class="download-file-btn">
+                        <i class="fas fa-download"></i>
+                        Download File
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="scripts/historyRequest.js"></script>
+</body>
+</html>
+

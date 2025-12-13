@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Office - Items</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/item.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+    <!-- Left Sidebar -->
+    <aside class="w-64 text-white flex flex-col h-screen fixed sidebar-bg">
+        <!-- Logo Section -->
+        <div class="p-6">
+            <div class="flex flex-col items-center">
+                <img src="../assets/SDOINLogo.svg" alt="SDOIN Logo" class="w-16 h-16 object-contain mb-2">
+                <h1 class="text-xl font-bold">SDOIN</h1>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="flex-1 py-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="#" class="nav-link active-link">
+                        <div class="active-indicator"></div>
+                        <i class="fas fa-shopping-basket w-5 ml-4"></i>
+                        <span class="font-medium">Items</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="request.html" class="nav-link">
+                        <i class="fas fa-file-alt w-5 ml-4"></i>
+                        <span class="font-medium">Request</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-user w-5 ml-4"></i>
+                        <span class="font-medium">Contact Us</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="historyRequest.html" class="nav-link">
+                        <i class="fas fa-clock w-5 ml-4"></i>
+                        <span class="font-medium">History Request</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- User Profile Section -->
+        <div class="p-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center">
+                    <i class="fas fa-user text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-semibold text-sm" id="user-name">Maricar T. Tulep</p>
+                    <p class="text-xs text-blue-300" id="user-title">Administrative Officer IV</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 ml-64 bg-gray-100 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm px-8 py-4 flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-gray-800">SUPPLY OFFICE</h2>
+            <div class="flex items-center gap-4">
+                <img src="../assets/DEPEDLogo.png" alt="DepEd Logo" class="h-10 w-auto">
+            </div>
+        </header>
+
+        <!-- Content Section -->
+        <div class="p-8">
+            <!-- Title and Search -->
+            <div class="mb-4 flex items-center justify-between">
+                <h3 class="text-3xl font-bold text-gray-800">ITEMS</h3>
+                <div class="relative">
+                    <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+            
+            <!-- Category -->
+            <div class="mb-6 flex items-center gap-2">
+                <label class="text-gray-700 font-medium">Category:</label>
+                <select class="category-select py-2 border-2 border-blue-500 rounded-lg focus:outline-none bg-white text-gray-700">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <!-- Items Grid -->
+            <div class="grid grid-cols-4 gap-6" id="items-grid">
+                <!-- Items will be dynamically generated here -->
+            </div>
+        </div>
+
+        <!-- Floating Action Button -->
+        <button id="cart-icon-btn" class="fixed bottom-8 right-8 w-14 h-14 bg-gray-700 hover:bg-gray-600 text-white rounded-full shadow-lg flex items-center justify-center transition-colors relative">
+            <i class="fas fa-shopping-cart text-xl"></i>
+            <span id="cart-badge" class="cart-badge hidden">0</span>
+        </button>
+    </main>
+
+    <!-- Product Preview Modal -->
+    <div id="product-modal" class="modal-overlay hidden">
+        <div class="modal-container">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2 class="modal-title">PRODUCT PREVIEW</h2>
+                <button class="modal-close" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-divider"></div>
+
+            <!-- Modal Content -->
+            <div class="modal-content">
+                <!-- Navigation Arrow Left -->
+                <button class="modal-nav-arrow modal-nav-left">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <!-- Product Image -->
+                <div class="modal-image-container">
+                    <img id="modal-product-image" src="../assets/A4Image.jpg" alt="Product Image" class="modal-product-image">
+                </div>
+
+                <!-- Navigation Arrow Right -->
+                <button class="modal-nav-arrow modal-nav-right">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Product Details -->
+                <div class="modal-details">
+                    <h3 id="modal-product-name" class="modal-product-name">PAPER, MULTICOPY, A4</h3>
+                    <div class="modal-details-inner">
+                        <div class="modal-detail-item">
+                            <span class="detail-label">Item Code:</span>
+                            <span id="modal-item-code" class="detail-value">14111507-PP-M01</span>
+                        </div>
+                        <div class="modal-detail-item">
+                            <span class="detail-label">UOM:</span>
+                            <span id="modal-uom" class="detail-value">REAM</span>
+                        </div>
+                        <div class="modal-detail-item">
+                            <span class="detail-label">Category:</span>
+                            <span id="modal-category" class="detail-value">Paper Products</span>
+                        </div>
+                        <div class="modal-detail-item">
+                            <span class="detail-label">Status:</span>
+                            <span id="modal-status" class="detail-value status-available">AVAILABLE</span>
+                        </div>
+                        <div class="modal-detail-item">
+                            <span class="detail-label">Available Stocks on Hand:</span>
+                            <span id="modal-stocks" class="detail-value">21,926</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quantity Input and Add to Cart -->
+                <div class="modal-actions">
+                    <div class="quantity-controls">
+                        <button class="quantity-btn quantity-minus">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="number" id="quantity-input" class="quantity-input" placeholder="Input Amount" value="1" min="1">
+                        <button class="quantity-btn quantity-plus">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        ADD TO CART
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal-overlay hidden">
+        <div class="modal-container cart-modal-container">
+            <!-- Cart Header -->
+            <div class="modal-header">
+                <h2 class="modal-title">CART</h2>
+                <button class="modal-close" id="close-cart-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-divider"></div>
+
+            <!-- Cart Content -->
+            <div class="cart-content">
+                <!-- Cart Headers -->
+                <div class="cart-headers">
+                    <div class="cart-header-item">Item</div>
+                    <div class="cart-header-quantity">Quantity</div>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cart-items-list" class="cart-items-list">
+                    <!-- Cart items will be dynamically generated here -->
+                </div>
+            </div>
+
+            <!-- Cart Actions -->
+            <div class="cart-actions">
+                <button class="cancel-order-btn">
+                    CANCEL ORDER
+                </button>
+                <button class="proceed-btn">
+                    PROCEED
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="scripts/item.js"></script>
+</body>
+</html>
+
