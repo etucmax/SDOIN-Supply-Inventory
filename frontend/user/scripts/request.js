@@ -62,7 +62,7 @@ $(document).ready(function() {
 
     // User data (will be loaded from data source later)
     const userData = {
-        name: "Maricar T. Tulep",
+        name: "James Supot",
         title: "Administrative Officer IV"
     };
 

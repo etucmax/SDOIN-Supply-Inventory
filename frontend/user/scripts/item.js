@@ -1,67 +1,151 @@
 $(document).ready(function() {
-    // Mock item data - 8 items
+    // Mock item data - 9 items
     const items = [
+        {
+            id: 0,
+            name: "Gcash 2k",
+            image: "../assets/important.jpg",
+            available: true,
+            productData: {
+                name: "GCASH 2K",
+                itemCode: "09567298121",
+                uom: "PIECE",
+                category: "Digital Products",
+                status: "AVAILABLE",
+                stocks: "2k",
+                image: "../assets/important.jpg",
+                available: true
+            }
+        },
         {
             id: 1,
             name: "Paper, Multicopy, A4",
             image: "../assets/A4Image.jpg",
-            available: true
+            available: true,
+            productData: {
+                name: "PAPER, MULTICOPY, A4",
+                itemCode: "14111507-PP-M01",
+                uom: "REAM",
+                category: "Paper Products",
+                status: "AVAILABLE",
+                stocks: "21,926",
+                image: "../assets/A4Image.jpg",
+                available: true
+            }
         },
         {
             id: 2,
             name: "Paper, Multicopy, A4",
             image: "../assets/A4Image.jpg",
-            available: false
+            available: false,
+            productData: {
+                name: "PAPER, MULTICOPY, A4",
+                itemCode: "14111507-PP-M01",
+                uom: "REAM",
+                category: "Paper Products",
+                status: "UNAVAILABLE",
+                stocks: "0",
+                image: "../assets/A4Image.jpg",
+                available: false
+            }
         },
         {
             id: 3,
             name: "Paper, Multicopy, A4",
             image: "../assets/A4Image.jpg",
-            available: true
+            available: true,
+            productData: {
+                name: "PAPER, MULTICOPY, A4",
+                itemCode: "14111507-PP-M01",
+                uom: "REAM",
+                category: "Paper Products",
+                status: "AVAILABLE",
+                stocks: "21,926",
+                image: "../assets/A4Image.jpg",
+                available: true
+            }
         },
         {
             id: 4,
             name: "Paper, Multicopy, A4",
             image: "../assets/A4Image.jpg",
-            available: true
+            available: true,
+            productData: {
+                name: "PAPER, MULTICOPY, A4",
+                itemCode: "14111507-PP-M01",
+                uom: "REAM",
+                category: "Paper Products",
+                status: "AVAILABLE",
+                stocks: "21,926",
+                image: "../assets/A4Image.jpg",
+                available: true
+            }
         },
         {
             id: 5,
             name: "Paper, Multicopy, A4",
             image: "../assets/A4Image.jpg",
-            available: false
+            available: false,
+            productData: {
+                name: "PAPER, MULTICOPY, A4",
+                itemCode: "14111507-PP-M01",
+                uom: "REAM",
+                category: "Paper Products",
+                status: "UNAVAILABLE",
+                stocks: "0",
+                image: "../assets/A4Image.jpg",
+                available: false
+            }
         },
         {
             id: 6,
             name: "Paper, Multicopy, A4",
             image: "../assets/A4Image.jpg",
-            available: true
+            available: true,
+            productData: {
+                name: "PAPER, MULTICOPY, A4",
+                itemCode: "14111507-PP-M01",
+                uom: "REAM",
+                category: "Paper Products",
+                status: "AVAILABLE",
+                stocks: "21,926",
+                image: "../assets/A4Image.jpg",
+                available: true
+            }
         },
         {
             id: 7,
             name: "Paper, Multicopy, A4",
             image: "../assets/A4Image.jpg",
-            available: true
+            available: true,
+            productData: {
+                name: "PAPER, MULTICOPY, A4",
+                itemCode: "14111507-PP-M01",
+                uom: "REAM",
+                category: "Paper Products",
+                status: "AVAILABLE",
+                stocks: "21,926",
+                image: "../assets/A4Image.jpg",
+                available: true
+            }
         },
         {
             id: 8,
             name: "Paper, Multicopy, A4",
             image: "../assets/A4Image.jpg",
-            available: false
+            available: false,
+            productData: {
+                name: "PAPER, MULTICOPY, A4",
+                itemCode: "14111507-PP-M01",
+                uom: "REAM",
+                category: "Paper Products",
+                status: "UNAVAILABLE",
+                stocks: "0",
+                image: "../assets/A4Image.jpg",
+                available: false
+            }
         }
     ];
-
-    // Mock product data for modal
-    const productData = {
-        name: "PAPER, MULTICOPY, A4",
-        itemCode: "14111507-PP-M01",
-        uom: "REAM",
-        category: "Paper Products",
-        status: "AVAILABLE",
-        stocks: "21,926",
-        image: "../assets/A4Image.jpg",
-        available: true
-    };
 
     // Function to render items
     function renderItems() {
@@ -90,8 +174,12 @@ $(document).ready(function() {
         });
     }
 
+    // Store current product data for add to cart
+    let currentProductData = null;
+
     // Function to open modal with product data
     function openProductModal(productData) {
+        currentProductData = productData; // Store for add to cart
         $('#modal-product-image').attr('src', productData.image);
         $('#modal-product-name').text(productData.name);
         $('#modal-item-code').text(productData.itemCode);
@@ -232,7 +320,11 @@ $(document).ready(function() {
     $(document).on('click', '.item-card', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        openProductModal(productData);
+        const itemId = $(this).data('item-id');
+        const clickedItem = items.find(item => item.id === itemId);
+        if (clickedItem && clickedItem.productData) {
+            openProductModal(clickedItem.productData);
+        }
     });
 
     // Close modal handlers
@@ -262,11 +354,12 @@ $(document).ready(function() {
 
     // Add to cart button
     $(document).on('click', '.add-to-cart-btn', function() {
+        if (!currentProductData) return;
         const quantity = parseInt($('#quantity-input').val()) || 1;
         const itemData = {
-            id: productData.itemCode,
-            name: productData.name,
-            image: productData.image,
+            id: currentProductData.itemCode,
+            name: currentProductData.name,
+            image: currentProductData.image,
             quantity: quantity
         };
         
